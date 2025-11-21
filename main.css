@@ -1,0 +1,563 @@
+/* ============================================ */
+/* FONTES E VARIÁVEIS GLOBAIS                     */
+/* ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root {
+    --rosa-claro: #f7d7e8;
+    --preto-chic: #222;
+    --branco: #fff;
+    --dourado-suave: #c9a86a;
+    --cinza-claro: #f9f9f9;
+    --cinza-texto: #555;
+
+    --font-titulos: 'Playfair Display', serif;
+    --font-corpo: 'Montserrat', sans-serif;
+}
+
+/* ============================================ */
+/* RESET BÁSICO E ESTILOS GLOBAIS               */
+/* ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-corpo);
+    color: var(--cinza-texto);
+    background-color: var(--branco);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-titulos);
+    color: var(--preto-chic);
+    font-weight: 700;
+}
+
+/* Altera o cursor sobre o texto para a seta padrão, em vez do cursor de texto */
+h1, h2, h3, p, .service-info span, .pricing-table td, .pricing-table th  {
+    cursor: default;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Linha decorativa abaixo dos títulos h2 */
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--dourado-suave);
+    margin: 8px auto 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* ============================================ */
+/* HEADER (CABEÇALHO)                           */
+/* ============================================ */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    color: var(--preto-chic);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--cinza-texto);
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--dourado-suave);
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--preto-chic);
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+/* Ajuste para o conteúdo não ficar sob o header fixo */
+main {
+    padding-top: 80px;
+}
+
+/* ============================================ */
+/* SEÇÃO HERO                                   */
+/* ============================================ */
+.hero-section {
+    background-color: var(--rosa-claro);
+    color: var(--preto-chic);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.hero-image img {
+    max-width: 300px;
+    border-radius: 10%;
+    border: 8px solid var(--branco);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--dourado-suave);
+    color: var(--branco);
+    padding: 15px 30px;
+    color: var(--branco);
+    padding: 12px 25px;
+    /* Ajustado para padronizar */
+    border-radius: 50px;
+    border: 2px solid transparent;
+    /* Adicionado para uma transição suave da borda */
+    border: 2px solid var(--dourado-suave);
+    /* Borda visível por padrão */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem; /* Garante o mesmo tamanho de fonte para todos os botões */
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--branco);
+    background-color: var(--branco);
+    color: var(--dourado-suave);
+    border-color: var(--dourado-suave);
+    transform: translateY(-3px);
+}
+
+/* Estilos para o botão do menu hambúrguer (desktop - escondido) */
+.menu-toggle {
+    display: none; /* Escondido por padrão em desktop */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--preto-chic);
+    cursor: pointer;
+    z-index: 1001; /* Garante que esteja acima de outros conteúdos */
+    padding: 0; /* Remove padding padrão do botão */
+}
+/* ============================================ */
+/* SEÇÃO SOBRE                                  */
+/* ============================================ */
+.about-section {
+    /* Degradê de um bege muito claro para o bege da seção hero */
+    background: linear-gradient(to bottom, #FDF8F5, #E8D5C4);
+}
+
+.about-section p {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* ============================================ */
+/* SEÇÃO SERVIÇOS                               */
+/* ============================================ */
+.services-section {
+    /* Degradê de um bege muito claro para o bege da seção hero */
+    background: linear-gradient(to bottom, #FDF8F5, #E8D5C4);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--branco);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Adicionado para alinhar o conteúdo */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo inicial para a animação de scroll */
+.service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+    color: var(--dourado-suave);
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    flex-grow: 1; /* Faz a descrição ocupar o espaço disponível */
+    margin-bottom: 20px;
+}
+
+.service-info {
+    font-size: 0.9rem;
+    color: var(--cinza-texto);
+    font-weight: 600;
+    margin-top: auto; /* Empurra para o final do flex container */
+}
+
+.service-info i {
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+    color: var(--dourado-suave);
+}
+
+/* Classe adicionada via JS para revelar o card */
+.service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================ */
+/* SEÇÃO TABELA DE PREÇOS                       */
+/* ============================================ */
+.pricing-section {
+    /* Degradê de um bege muito claro para o bege da seção hero */
+    background: linear-gradient(to bottom, #FDF8F5, #E8D5C4);
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    /* Garante que as bordas arredondadas funcionem */
+    border: 1px solid var(--cinza-claro); /* Adiciona uma borda para melhor visualização em mobile */
+}
+
+.pricing-table th,
+.pricing-table td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.pricing-table thead {
+    background-color: var(--preto-chic);
+    color: var(--branco);
+    font-family: var(--font-titulos);
+    font-size: 1.1rem;
+}
+
+.pricing-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.5); /* Fundo branco semitransparente para as linhas pares */
+}
+
+.pricing-table tbody tr:hover {
+    background-color: #FDF8F5; /* Cor de hover mais clara e alinhada ao degradê */
+}
+
+.pricing-note {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+/* ============================================ */
+/* SEÇÃO CONTATO                                */
+/* ============================================ */
+.contact-section {
+    /* Degradê de um bege muito claro para o bege da seção hero */
+    background: linear-gradient(to bottom, #FDF8F5, #E8D5C4);
+}
+
+.contact-section>.container>p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.contact-link {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--dourado-suave);
+    /* Herda os estilos de .btn-primary */
+}
+
+.contact-link.whatsapp {
+    background-color: var(--dourado-suave);
+    color: var(--branco);
+}
+
+.contact-link.whatsapp:hover {
+    background-color: var(--branco);
+    color: var(--dourado-suave);
+}
+
+.contact-link.instagram {
+    background-color: var(--dourado-suave);
+    /* Alterado para combinar com o botão WhatsApp */
+    color: var(--branco);
+}
+
+.contact-link.instagram:hover {
+    background-color: var(--branco);
+    color: var(--dourado-suave);
+}
+
+/* ============================================ */
+/* RODAPÉ                                       */
+/* ============================================ */
+.main-footer {
+    background-color: var(--preto-chic);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* ============================================ */
+/* ESTILOS ADICIONAIS (JS)                      */
+/* ============================================ */
+/* Estilo para o link do menu ativo (Scrollspy) */
+.main-nav a.active {
+    color: var(--preto-chic);
+}
+
+.main-nav a.active::after {
+    width: 100%;
+}
+
+/* ============================================ */
+/* RESPONSIVIDADE                               */
+/* ============================================ */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-image img {
+        max-width: 180px;
+    }
+    
+    /* Estilos para o menu hambúrguer em mobile */
+    .main-header .container {
+        flex-direction: row; /* Mantém logo e toggle na mesma linha */
+        justify-content: space-between; /* Espaço entre logo e toggle */
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra o botão do menu hambúrguer em mobile */
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Começa fora da tela */
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(237, 214, 226, 0.98); /* Cor rosa claro (de --rosa-claro) com 98% de opacidade */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: left 0.3s ease-in-out;
+        z-index: 999; /* Abaixo do toggle, acima do conteúdo principal */
+        overflow-y: auto; /* Para permitir rolagem se o menu for muito longo */
+    }
+
+    .main-nav.active {
+        left: 0; /* Desliza para dentro da tela */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 0; /* Remove padding padrão da lista */
+    }
+
+    .main-nav a {
+        font-size: 1.5rem;
+        padding: 10px 0;
+        color: var(--preto-chic); /* Garante boa visibilidade */
+    }
+
+    .main-nav a::after {
+        margin: 0 auto; /* Centraliza o sublinhado */
+        background-color: var(--dourado-suave); /* Cor do sublinhado */
+    }
+
+    /* Impede a rolagem do corpo quando o menu está aberto */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Estilos para a tabela de preços em mobile */
+    .pricing-table {
+        border: 0; /* Remove a borda da tabela */
+    }
+
+    .pricing-table thead {
+        display: none; /* Esconde o cabeçalho da tabela */
+    }
+
+    .pricing-table tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid var(--cinza-claro);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .pricing-table td {
+        display: block;
+        text-align: right;
+        padding-left: 50%; /* Abre espaço para o label */
+        position: relative;
+        border-bottom: 1px solid var(--cinza-claro);
+    }
+
+    .pricing-table td::before {
+        content: attr(data-label); /* Exibe o conteúdo do data-label */
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px); /* Ajusta a largura para o label */
+        padding-right: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 700;
+        color: var(--preto-chic);
+        text-align: left;
+    }
+
+    .pricing-table td:last-child {
+        border-bottom: 0; /* Remove a borda da última célula de cada linha */
+    }
+
+    .pricing-table tbody tr:nth-child(even) {
+        background-color: var(--branco); /* Reseta o fundo para linhas alternadas */
+    }
+
+    .pricing-table tbody tr:hover {
+        background-color: var(--cinza-claro); /* Efeito hover para o bloco da linha */
+    }
+
+    /* Ajuste específico para a célula com colspan (Maquiagem para Noivas) */
+    .pricing-table td[colspan="2"] {
+        text-align: center;
+        padding-left: 15px; /* Remove o padding extra, já que não terá label */
+    }
+    .pricing-table td[colspan="2"]::before {
+        content: none; /* Esconde o label para a célula com colspan */
+    }
+
+    /* Esconde as colunas de preço no cabeçalho da tabela em mobile */
+    .pricing-table th.desktop-only {
+        display: none;
+    }
+    /* Garante que as células de preço não tenham o label em mobile se não for necessário */
+    .pricing-table td.desktop-only::before {
+        content: none;
+    }
+}
