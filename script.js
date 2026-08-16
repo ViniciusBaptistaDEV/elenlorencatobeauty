@@ -9,21 +9,33 @@ document.addEventListener('DOMContentLoaded', () => {
      * para rolar suavemente até a seção correspondente.
      */
     const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+    const logoLink = document.querySelector('.logo');
+
+    // Função para scroll suave até o elemento alvo
+    function smoothScrollTo(targetId) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault(); // Previne o comportamento padrão do link
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            smoothScrollTo(this.getAttribute('href'));
         });
     });
+
+    // Scroll suave para o hero ao clicar no logo, sem alterar a URL
+    if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothScrollTo('#hero');
+        });
+    }
 
     /**
      * ============================================
@@ -59,6 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const sections = document.querySelectorAll('section[id]');
     const navLinksSpy = document.querySelectorAll('.main-nav a');
+    const heroLink = document.querySelector('.main-nav a[href="#hero"]');
+
+    // Função auxiliar para remover a classe 'active' de todos os links
+    function removeActiveFromAllLinks() {
+        navLinksSpy.forEach(link => {
+            link.classList.remove('active');
+        });
+    }
+
+    // Função para ativar o link "Início" quando estiver no topo da página
+    function activateHeroLink() {
+        removeActiveFromAllLinks();
+        if (heroLink) {
+            heroLink.classList.add('active');
+        }
+    }
 
     const scrollSpyObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -66,9 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const id = entry.target.getAttribute('id');
                 
                 // Remove a classe ativa de todos os links
-                navLinksSpy.forEach(link => {
-                    link.classList.remove('active');
-                });
+                removeActiveFromAllLinks();
 
                 // Adiciona a classe ativa ao link correspondente
                 const activeLink = document.querySelector(`.main-nav a[href="#${id}"]`);
@@ -84,6 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
         scrollSpyObserver.observe(section);
     });
+
+    // Listener de scroll para ativar "Início" quando estiver no topo da página
+    // (o observador acima pode não disparar para o hero no carregamento inicial)
+    window.addEventListener('scroll', () => {
+        // Se o scroll estiver no topo (ou muito próximo), ativa o link "Início"
+        if (window.scrollY < 50) {
+            activateHeroLink();
+        }
+    });
+
+    // Ativa o link "Início" no carregamento da página
+    activateHeroLink();
 
     /**
      * ============================================
